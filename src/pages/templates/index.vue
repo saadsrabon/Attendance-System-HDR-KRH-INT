@@ -393,17 +393,7 @@ const resetFilters = () => {
   notify("Filter telah diset semula", "success", 2000);
 };
 
-// Validation function for unique kod templat
-const validateUniqueKodTemplat = (params) => {
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      const existingTemplate = templateData.value.find(
-        (item) => item.kodTemplat === params.value && item.id !== formRecord.value.id
-      );
-      resolve(!existingTemplate);
-    }, 100);
-  });
-};
+
 
 // Modal functions
 const openAddModal = () => {
@@ -445,10 +435,7 @@ const closeFormModal = () => {
   originalFormData.value = {};
 };
 
-const cancelForm = () => {
-  closeFormModal();
-  notify("Operasi dibatalkan", "info", 2000);
-};
+
 
 const resetForm = () => {
   if (isEditMode.value) {
@@ -497,11 +484,16 @@ const saveTemplate = async () => {
         const maxKod = Math.max(...templateData.value.map((t) => parseInt(t.kodTemplat) || 0));
         formRecord.value.kodTemplat = String(maxKod + 1).padStart(2, "0");
       }
-
+      //generate new id
+      if(!formRecord.value.id){
+        // get all the id and find the max id and return with +1
+        const maxId = Math.max(...templateData.value.map((t) => parseInt(t.id) || 0));
+        formRecord.value.id = String(maxId + 1);
+      }
       // Add new template
       const newTemplate = {
         ...formRecord.value,
-        id: nextId.value++,
+        
       };
       templateData.value.unshift(newTemplate);
       notify(`Templat "${formRecord.value.namaTemplat}" berjaya ditambah`, "success", 3000);
