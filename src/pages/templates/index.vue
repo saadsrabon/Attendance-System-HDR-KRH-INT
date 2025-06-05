@@ -138,7 +138,7 @@
       <DxScrollView width="100%" height="100%">
         <DxForm
           ref="formRef"
-          :form-data="formRecord"
+          :form-data="formDisplayData"
           :show-validation-summary="true"
           validation-group="templateForm"
           label-location="top"
@@ -146,21 +146,9 @@
           class="template-form"
         >
           <div class="form-content ">
-            <!-- <DxSimpleItem data-field="kodTemplat" :is-required="true" editor-type="dxTextBox">
-              <DxLabel text="Kod Templat" />
-              <DxRequiredRule message="Kod Templat diperlukan" />
-              <DxStringLengthRule :max="10" message="Kod Templat maksimum 10 aksara" />
-              <DxAsyncRule
-                message="Kod Templat sudah wujud"
-                :validation-callback="validateUniqueKodTemplat"
-              />
-              <DxTextBox
-                :max-length="10"
-                placeholder="Masukkan kod templat"
-                :disabled="isEditMode"
-              />
-            </DxSimpleItem> -->
-
+         
+  <DxSimpleItem data-field="id" :visible="false" />
+    <DxSimpleItem data-field="kodTemplat" :visible="false" />
             <DxSimpleItem data-field="jenisTemplat" :is-required="true" editor-type="dxSelectBox">
               <DxLabel text="Jenis Templat" />
               <DxRequiredRule message="Jenis Templat diperlukan" />
@@ -170,6 +158,7 @@
                 value-expr="value"
                 placeholder="Pilih jenis templat"
                 :search-enabled="false"
+                
               />
             </DxSimpleItem>
 
@@ -322,6 +311,7 @@ const formPopupVisible = ref(false);
 const deletePopupVisible = ref(false);
 const isEditMode = ref(false);
 const formRecord = ref({});
+const formDisplayData = ref({});
 const selectedToDelete = ref(null);
 const nextId = ref(6);
 const formRef = ref(null);
@@ -413,8 +403,14 @@ const openEditModal = (data) => {
   isEditMode.value = true;
   // Create a deep copy of the data to avoid direct mutation
   formRecord.value = {
-    // id: data.id,
-    // kodTemplat: data.kodTemplat,
+    id: data.id,
+    kodTemplat: data.kodTemplat,
+    jenisTemplat: data.jenisTemplat,
+    namaTemplat: data.namaTemplat,
+    tajuk: data.tajuk || "",
+    status: data.status,
+  };
+  formDisplayData.value = {
     jenisTemplat: data.jenisTemplat,
     namaTemplat: data.namaTemplat,
     tajuk: data.tajuk || "",
