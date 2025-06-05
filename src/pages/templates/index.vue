@@ -42,8 +42,6 @@
           label-mode="outside"
         />
       </DxItem>
-
-      
     </DxToolbar>
 
     <DxButton
@@ -63,17 +61,15 @@
       :width="100"
     />
     <div>
-    
-        <DxButton
-          icon="plus"
-          type="success"
-          styling-mode="contained"
-          @click="openAddModal"
-          :width="40"
-          :height="40"
-          class="add-button"
-        />
-   
+      <DxButton
+        icon="plus"
+        type="success"
+        styling-mode="contained"
+        @click="openAddModal"
+        :width="40"
+        :height="40"
+        class="add-button"
+      />
     </div>
 
     <!-- Data Grid -->
@@ -136,83 +132,103 @@
       class="form-popup"
     >
       <DxScrollView width="100%" height="100%">
-        <DxForm
-          ref="formRef"
-          :form-data="formDisplayData"
-          :show-validation-summary="true"
-          validation-group="templateForm"
-          label-location="top"
-          :col-count="2"
-          class="template-form"
-        >
-          <div class="form-content ">
-         
-  <DxSimpleItem data-field="id" :visible="false" />
-    <DxSimpleItem data-field="kodTemplat" :visible="false" />
-            <DxSimpleItem data-field="jenisTemplat" :is-required="true" editor-type="dxSelectBox">
-              <DxLabel text="Jenis Templat" />
-              <DxRequiredRule message="Jenis Templat diperlukan" />
-              <DxSelectBox
-                :data-source="jenisTemplatOptionsForForm"
-                display-expr="text"
-                value-expr="value"
-                placeholder="Pilih jenis templat"
-                :search-enabled="false"
-                
-              />
-            </DxSimpleItem>
+        <form @submit.prevent="saveTemplate">
+          <DxForm
+            ref="formRef"
+            :form-data="formDisplayData"
+            label-location="top"
+            :col-count="2"
+            class="template-form"
+          >
+            <div class="form-content">
+              <DxSimpleItem data-field="id" :visible="false" />
+              <DxSimpleItem data-field="kodTemplat" :visible="false" />
+              <DxSimpleItem 
+                data-field="jenisTemplat" 
+                editor-type="dxSelectBox"
+                :is-required="true"
+              >
+                <DxLabel text="Jenis Templat" />
+                <DxValidator>
+                  <DxRequiredRule message="Jenis Templat diperlukan" />
+                </DxValidator>
+                <DxSelectBox
+                  :data-source="jenisTemplatOptionsForForm"
+                  display-expr="text"
+                  value-expr="value"
+                  placeholder="Pilih jenis templat"
+                  :search-enabled="false"
+                />
+              </DxSimpleItem>
 
-            <DxSimpleItem data-field="namaTemplat" :is-required="true" editor-type="dxTextBox">
-              <DxLabel text="Nama Templat" />
-              <DxRequiredRule message="Nama Templat diperlukan" />
-              <DxStringLengthRule
-                :min="5"
-                :max="100"
-                message="Nama Templat mesti antara 5-100 aksara"
-              />
-              <DxTextBox :max-length="100" placeholder="Masukkan nama templat" />
-            </DxSimpleItem>
+              <DxSimpleItem 
+                data-field="namaTemplat" 
+                editor-type="dxTextBox"
+                :is-required="true"
+              >
+                <DxLabel text="Nama Templat" />
+                <DxValidator>
+                  <DxRequiredRule message="Nama Templat diperlukan" />
+                  <DxStringLengthRule
+                    :min="5"
+                    :max="100"
+                    message="Nama Templat mesti antara 5-100 aksara"
+                  />
+                </DxValidator>
+                <DxTextBox :max-length="100" placeholder="Masukkan nama templat" />
+              </DxSimpleItem>
 
-            <DxSimpleItem data-field="tajuk" editor-type="dxTextBox">
-              <DxLabel text="Tajuk" />
-              <DxRequiredRule message="Status diperlukan" />
-              <DxStringLengthRule :max="50" message="Tajuk maksimum 50 aksara" />
-              <DxTextBox :max-length="50" placeholder="Masukkan tajuk (pilihan)" />
-            </DxSimpleItem>
+              <DxSimpleItem 
+                data-field="tajuk" 
+                editor-type="dxTextBox"
+              >
+                <DxLabel text="Tajuk" />
+                <DxValidator>
+                  <DxStringLengthRule :max="50" message="Tajuk maksimum 50 aksara" />
+                </DxValidator>
+                <DxTextBox :max-length="50" placeholder="Masukkan tajuk (pilihan)" />
+              </DxSimpleItem>
 
-            <DxSimpleItem data-field="status" :is-required="true" editor-type="dxSelectBox">
-              <DxLabel text="Status" />
-              <DxRequiredRule message="Status diperlukan" />
-              <DxSelectBox
-                :data-source="statusOptionsForForm"
-                display-expr="text"
-                value-expr="value"
-                placeholder="Pilih status"
-                :search-enabled="false"
-              />
-            </DxSimpleItem>
+              <DxSimpleItem 
+                data-field="status" 
+                editor-type="dxSelectBox"
+                :is-required="true"
+              >
+                <DxLabel text="Status" />
+                <DxValidator>
+                  <DxRequiredRule message="Status diperlukan" />
+                </DxValidator>
+                <DxSelectBox
+                  :data-source="statusOptionsForForm"
+                  display-expr="text"
+                  value-expr="value"
+                  placeholder="Pilih status"
+                  :search-enabled="false"
+                />
+              </DxSimpleItem>
+            </div>
+          </DxForm>
+          <div class="flex justify-end gap-2">
+            <DxButton
+              :text="isEditMode ? 'Kemaskini' : 'Simpan'"
+              type="default"
+              styling-mode="contained"
+            
+              :width="120"
+              icon="save"
+              :use-submit-behavior="true"
+            />
+
+            <DxButton
+              text="Set Semula"
+              icon="redo"
+              type="normal"
+              styling-mode="contained"
+              @click="resetForm"
+              :width="120"
+            />
           </div>
-        </DxForm>
-        <div class="flex justify-end gap-2">
-          <DxButton
-            :text="isEditMode ? 'Kemaskini' : 'Simpan'"
-            type="default"
-            styling-mode="contained"
-            @click="saveTemplate"
-            :width="120"
-            icon="save"
-          />
-
-          <DxButton
-            text="Set Semula"
-            icon="redo"
-            type="normal"
-            styling-mode="contained"
-            @click="resetForm"
-            :width="120"
-          />
-
-        </div>
+        </form>
       </DxScrollView>
     </DxPopup>
 
@@ -273,9 +289,12 @@ import {
   DxForm,
   DxSimpleItem,
   DxLabel,
+} from "devextreme-vue/form";
+import {
+  DxValidator,
   DxRequiredRule,
   DxStringLengthRule,
-} from "devextreme-vue/form";
+} from "devextreme-vue/validator";
 import { ref, computed } from "vue";
 import notify from "devextreme/ui/notify";
 import { initialTemplateData } from "@/stores/templates/data";
@@ -291,6 +310,7 @@ function getUniqueOptions(data, key) {
     })
     .map((item) => ({ text: item[key], value: item[key] }));
 }
+
 const jenisTemplatOptions = getUniqueOptions(initialTemplateData, "jenisTemplat");
 const statusOptions = getUniqueOptions(initialTemplateData, "status");
 const namaTemplatOptions = getUniqueOptions(initialTemplateData, "namaTemplat");
@@ -313,7 +333,6 @@ const isEditMode = ref(false);
 const formRecord = ref({});
 const formDisplayData = ref({});
 const selectedToDelete = ref(null);
-const nextId = ref(6);
 const formRef = ref(null);
 
 // Filter states
@@ -383,17 +402,20 @@ const resetFilters = () => {
   notify("Filter telah diset semula", "success", 2000);
 };
 
-
-
 // Modal functions
 const openAddModal = () => {
   isEditMode.value = false;
   formRecord.value = {
-    // kodTemplat: "",
     jenisTemplat: "",
     namaTemplat: "",
     tajuk: "",
-    status: "Aktif", // Default status
+    status: "", // Default status
+  };
+  formDisplayData.value = {
+    jenisTemplat: "",
+    namaTemplat: "",
+    tajuk: "",
+    status: "",
   };
   originalFormData.value = {};
   formPopupVisible.value = true;
@@ -401,7 +423,6 @@ const openAddModal = () => {
 
 const openEditModal = (data) => {
   isEditMode.value = true;
-  // Create a deep copy of the data to avoid direct mutation
   formRecord.value = {
     id: data.id,
     kodTemplat: data.kodTemplat,
@@ -416,7 +437,6 @@ const openEditModal = (data) => {
     tajuk: data.tajuk || "",
     status: data.status,
   };
-  // Store original data for comparison
   originalFormData.value = { ...formRecord.value };
   formPopupVisible.value = true;
 };
@@ -426,31 +446,32 @@ const closeFormModal = () => {
   if (formRef.value?.instance) {
     formRef.value.instance.resetValues();
   }
-  // Reset form data
   formRecord.value = {};
   originalFormData.value = {};
 };
 
-
-
 const resetForm = () => {
   if (isEditMode.value) {
-    // Reset to original data in edit mode
     formRecord.value = { ...originalFormData.value };
+    formDisplayData.value = {
+      jenisTemplat: originalFormData.value.jenisTemplat,
+      namaTemplat: originalFormData.value.namaTemplat,
+      tajuk: originalFormData.value.tajuk || "",
+      status: originalFormData.value.status,
+    };
   } else {
-    // Reset to empty values in add mode
     formRecord.value = {
-      kodTemplat: "",
       jenisTemplat: "",
       namaTemplat: "",
       tajuk: "",
       status: "Aktif",
     };
-  }
-
-  // Reset form validation
-  if (formRef.value?.instance) {
-    formRef.value.instance.resetValues();
+    formDisplayData.value = {
+      jenisTemplat: "",
+      namaTemplat: "",
+      tajuk: "",
+      status: "Aktif",
+    };
   }
 
   notify("Borang telah diset semula", "info", 2000);
@@ -482,14 +503,12 @@ const saveTemplate = async () => {
       }
       //generate new id
       if(!formRecord.value.id){
-        // get all the id and find the max id and return with +1
         const maxId = Math.max(...templateData.value.map((t) => parseInt(t.id) || 0));
         formRecord.value.id = String(maxId + 1);
       }
       // Add new template
       const newTemplate = {
         ...formRecord.value,
-        
       };
       templateData.value.unshift(newTemplate);
       notify(`Templat "${formRecord.value.namaTemplat}" berjaya ditambah`, "success", 3000);
@@ -522,11 +541,12 @@ const confirmDelete = () => {
 </script>
 
 <style scoped>
+/* Your existing styles remain unchanged */
 .filter-label {
   margin-right: 8px;
   align-self: center;
 }
-/* Header styling to match the blue theme */
+
 :deep(.dx-datagrid-headers) {
   background-color: #2c5282 !important;
   color: white !important;
@@ -543,7 +563,6 @@ const confirmDelete = () => {
   color: white !important;
 }
 
-/* Row styling */
 :deep(.dx-row-alt) {
   background-color: #f7fafc;
 }
@@ -553,35 +572,26 @@ const confirmDelete = () => {
   padding: 8px 12px;
 }
 
-/* Toolbar styling */
 .filter-toolbar {
   height: 100px;
   padding: 15px 0;
-  /* background-color: #f8f9fa;
-  border: 1px solid #dee2e6; */
   border-radius: 8px;
-
- 
 }
 
 :deep(.dx-toolbar .dx-item) {
   margin-right: 10px;
 }
 
-/* Form styling */
 .form-popup :deep(.dx-popup-content) {
   padding: 20px;
 }
 
 .template-form {
   padding: 20px;
- 
 }
 
 .form-content {
   margin-bottom: 30px;
-  
-  
 }
 
 .form-content :deep(.dx-field-item) {
@@ -594,23 +604,12 @@ const confirmDelete = () => {
   margin-bottom: 8px;
 }
 
-.form-buttons {
-  display: flex;
-  justify-content: center;
-  gap: 15px;
-  padding-top: 20px;
-  border-top: 1px solid #e2e8f0;
-  color: black;
-}
-
-/* Custom DataGrid styling */
 .custom-datagrid {
   border-radius: 8px;
   overflow: hidden;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
-/* Delete confirmation styling */
 .delete-confirm-content {
   text-align: center;
   padding: 20px;
@@ -629,7 +628,6 @@ const confirmDelete = () => {
   margin-top: 20px;
 }
 
-/* Validation styling */
 :deep(.dx-invalid .dx-texteditor-input) {
   border-color: #dc3545 !important;
 }
@@ -638,12 +636,6 @@ const confirmDelete = () => {
   border-color: #dc3545 !important;
 }
 
-:deep(.dx-validationsummary-item) {
-  color: #dc3545;
-  margin-bottom: 10px;
-}
-
-/* Notification styling */
 :deep(.dx-toast-success) {
   background-color: #28a745;
 }
@@ -656,7 +648,6 @@ const confirmDelete = () => {
   background-color: #17a2b8;
 }
 
-/* Button styling */
 :deep(.dx-button.dx-button-success) {
   background-color: #28a745;
   border-color: #28a745;
@@ -667,7 +658,6 @@ const confirmDelete = () => {
   border-color: #dc3545;
 }
 
-/* Selectbox and textbox styling */
 :deep(.dx-selectbox),
 :deep(.dx-textbox) {
   border-radius: 4px;
@@ -678,31 +668,28 @@ const confirmDelete = () => {
   padding: 8px 12px;
 }
 
-/* Popup styling */
 :deep(.dx-popup-title) {
   background-color: #2c5282;
   color: white;
   font-weight: 600;
 }
 
-/* Search panel styling */
 :deep(.dx-datagrid-search-panel) {
   background-color: #f8f9fa;
   border-bottom: 1px solid #dee2e6;
 }
 
-/* Pager styling */
 :deep(.dx-pager) {
   background-color: #f8f9fa;
   border-top: 1px solid #dee2e6;
 }
 
-/* Disabled field styling */
 :deep(.dx-state-disabled .dx-texteditor-input) {
   background-color: #f8f9fa;
   color: #6c757d;
 }
-.add-button{
+
+.add-button {
   background-color: #2c5282 !important;
   color: white !important;
   font-weight: 600;
