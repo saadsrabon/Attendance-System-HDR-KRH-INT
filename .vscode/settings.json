@@ -1,0 +1,12 @@
+{
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit"
+  },
+  "eslint.validate": ["javascript", "javascriptreact", "typescript", "typescriptreact", "vue"],
+  "eslint.run": "onType",
+  "i18n-ally.localesPaths": [
+    "i18n",
+    "i18n/locales",
+    "src/configs/locales"
+  ]
+}

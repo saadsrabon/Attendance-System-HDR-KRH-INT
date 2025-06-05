@@ -1,0 +1,16 @@
+{
+  "print": "Print",
+  "export": "Export",
+  "search": "Search",
+  "reset": "Reset",
+  "cancel": "Cancel",
+  "ok": "OK",
+  "save": "Save",
+  "delete": "Delete",
+  "edit": "Edit",
+  "view": "View",
+  "close": "Close",
+  "pleaseSelect": "Please Select",
+  "notSelected": "Not selected",
+  "unknown": "Unknown"
+}

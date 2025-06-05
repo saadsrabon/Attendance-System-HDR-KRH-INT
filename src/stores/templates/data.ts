@@ -1,0 +1,66 @@
+export const initialTemplateData = [
+  {
+    id: 1,
+    kodTemplat: '01',
+    jenisTemplat: 'E-mel',
+    namaTemplat: 'E-mel Notifikasi Untuk Kemas Kini Maklumat Profil Peribadi',
+    status: 'Aktif',
+  },
+  {
+    id: 2,
+    kodTemplat: '02',
+    jenisTemplat: 'E-mel',
+    namaTemplat: 'E-mel Notifikasi Memerlukan Pengesahan Maklumat Wilayah Asal',
+    status: 'Aktif',
+  },
+  {
+    id: 3,
+    kodTemplat: '03',
+    jenisTemplat: 'SMS',
+    namaTemplat: 'SMS Notifikasi Untuk Kemas Kini Maklumat Profil Peribadi',
+    status: 'Tidak Aktif',
+  },
+  {
+    id: 4,
+    kodTemplat: '04',
+    jenisTemplat: 'SMS',
+    namaTemplat: 'SMS Notifikasi Memerlukan Pengesahan Maklumat Wilayah Asal',
+    status: 'Aktif',
+  },
+  {
+    id: 5,
+    kodTemplat: '05',
+    jenisTemplat: 'E-mel',
+    namaTemplat: 'E-mel Notifikasi Untuk Permohonan Cuti',
+    status: 'Aktif',
+  },
+  {
+    id: 6,
+    kodTemplat: '06',
+    jenisTemplat: 'E-mel',
+    namaTemplat: 'E-mel Notifikasi Untuk Permohonan Cuti',
+    status: 'Aktif',
+  },
+  {
+    id: 7,
+    kodTemplat: '07',
+    jenisTemplat: 'E-mel',
+    namaTemplat: 'E-mel Notifikasi Untuk Permohonan Cuti',
+    status: 'Aktif',
+  },
+  {
+    id: 8,
+    kodTemplat: '08',
+    jenisTemplat: 'E-mel',
+    namaTemplat: 'E-mel Notifikasi Untuk Permohonan Cuti',
+    status: 'Aktif',
+  },
+  {
+    id: 9,
+    kodTemplat: '09',
+    jenisTemplat: 'E-mel',
+    namaTemplat: 'E-mel Notifikasi Untuk Permohonan Cuti',
+    status: 'Aktif',
+  },
+ 
+];

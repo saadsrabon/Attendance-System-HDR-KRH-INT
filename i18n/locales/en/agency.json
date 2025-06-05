@@ -1,0 +1,17 @@
+{
+  "agency": {
+    "titleOfSearch": "Agency Attendance System Integration Information Search",
+    "titleOfList": "Agency Attendance System Integration Information List",
+    "agency": "Agency",
+    "integrationDate": "Integration Date",
+    "attendanceDate": "Attendance Date",
+    "status": "Status",
+    "action": "Action"
+  },
+  "validation": {
+    "agencyRequired": "Agency is not selected",
+    "integrationDateRequired": "Integration Date is not selected",
+    "attendanceDateRequired": "Attendance System Data Date is not selected",
+    "statusRequired": "Integration Status is not selected"
+  }
+}
