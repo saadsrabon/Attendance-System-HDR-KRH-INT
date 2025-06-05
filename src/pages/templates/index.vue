@@ -129,7 +129,7 @@
     <DxPopup
       v-model:visible="formPopupVisible"
       :width="600"
-      :height="550"
+      :height="300"
       :title="isEditMode ? 'Kemaskini Templat' : 'Tambah Templat Baru'"
       @hiding="closeFormModal"
       :resize-enabled="true"
@@ -142,11 +142,11 @@
           :show-validation-summary="true"
           validation-group="templateForm"
           label-location="top"
-          :col-count="1"
+          :col-count="2"
           class="template-form"
         >
-          <div class="form-content">
-            <DxSimpleItem data-field="kodTemplat" :is-required="true" editor-type="dxTextBox">
+          <div class="form-content ">
+            <!-- <DxSimpleItem data-field="kodTemplat" :is-required="true" editor-type="dxTextBox">
               <DxLabel text="Kod Templat" />
               <DxRequiredRule message="Kod Templat diperlukan" />
               <DxStringLengthRule :max="10" message="Kod Templat maksimum 10 aksara" />
@@ -159,7 +159,7 @@
                 placeholder="Masukkan kod templat"
                 :disabled="isEditMode"
               />
-            </DxSimpleItem>
+            </DxSimpleItem> -->
 
             <DxSimpleItem data-field="jenisTemplat" :is-required="true" editor-type="dxSelectBox">
               <DxLabel text="Jenis Templat" />
@@ -204,13 +204,14 @@
             </DxSimpleItem>
           </div>
         </DxForm>
-        <div class="">
+        <div class="flex justify-end gap-2">
           <DxButton
             :text="isEditMode ? 'Kemaskini' : 'Simpan'"
             type="default"
             styling-mode="contained"
             @click="saveTemplate"
             :width="120"
+            icon="save"
           />
 
           <DxButton
@@ -222,13 +223,6 @@
             :width="120"
           />
 
-          <DxButton
-            text="Batal"
-            type="normal"
-            styling-mode="outlined"
-            @click="cancelForm"
-            :width="120"
-          />
         </div>
       </DxScrollView>
     </DxPopup>
@@ -292,7 +286,6 @@ import {
   DxLabel,
   DxRequiredRule,
   DxStringLengthRule,
-  DxAsyncRule,
 } from "devextreme-vue/form";
 import { ref, computed } from "vue";
 import notify from "devextreme/ui/notify";
@@ -416,7 +409,7 @@ const validateUniqueKodTemplat = (params) => {
 const openAddModal = () => {
   isEditMode.value = false;
   formRecord.value = {
-    kodTemplat: "",
+    // kodTemplat: "",
     jenisTemplat: "",
     namaTemplat: "",
     tajuk: "",
@@ -430,8 +423,8 @@ const openEditModal = (data) => {
   isEditMode.value = true;
   // Create a deep copy of the data to avoid direct mutation
   formRecord.value = {
-    id: data.id,
-    kodTemplat: data.kodTemplat,
+    // id: data.id,
+    // kodTemplat: data.kodTemplat,
     jenisTemplat: data.jenisTemplat,
     namaTemplat: data.namaTemplat,
     tajuk: data.tajuk || "",
@@ -595,10 +588,13 @@ const confirmDelete = () => {
 
 .template-form {
   padding: 20px;
+ 
 }
 
 .form-content {
   margin-bottom: 30px;
+  
+  
 }
 
 .form-content :deep(.dx-field-item) {

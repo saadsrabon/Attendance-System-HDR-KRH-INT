@@ -61,6 +61,7 @@ export const initialTemplateData = [
     jenisTemplat: 'E-mel',
     namaTemplat: 'E-mel Notifikasi Untuk Permohonan Cuti',
     status: 'Aktif',
+    tajuk: 'E-mel Notifikasi Untuk Permohonan Cuti',
   },
  
 ];
