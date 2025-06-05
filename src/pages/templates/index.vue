@@ -556,7 +556,6 @@ const confirmDelete = () => {
 /* Toolbar styling */
 .filter-toolbar {
   height: 100px;
-  margin-bottom: 20px;
   padding: 15px 0;
   /* background-color: #f8f9fa;
   border: 1px solid #dee2e6; */
